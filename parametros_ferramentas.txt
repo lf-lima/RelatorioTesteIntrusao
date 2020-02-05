@@ -1,0 +1,876 @@
+# Estudo exploratório com ferramentas de teste de intrusão
+# Levantamento dos parâmetros das ferramentas Arachni, HTCAP, 
+  Skipfish, SQLmap, Metasploit, Wapiti, Wfuzz, XSSer e ZAP
+
+Arachni   
+Parâmetros:
+  -h, --help                  Output this message.
+  --version               Show version information.
+  --authorized-by EMAIL_ADDRESS E-mail address of the person who authorized the scan.
+  --output-verbose        Show verbose output.
+  --output-debug [LEVEL 1-4] Show debugging information.
+  --output-only-positives Only output positive results.
+              --scope-include-pattern PATTERN Only include resources whose path/action matches PATTERN.                                                         
+             --scope-include-subdomains Follow links to subdomains.
+             --scope-exclude-pattern PATTERN Exclude resources whose path/action matches PATTERN.
+             --scope-exclude-file-extensions EXTENSION,EXTENSION2, … Exclude resources with the specified extensions.
+              --scope-exclude-content-pattern PATTERN Exclude pages whose content matches PATTERN.
+              --scope-exclude-binaries Exclude non text-based pages.
+              --scope-redundant-path-pattern PATTERN:LIMIT Limit crawl on redundant pages like galleries or catalogs.
+               --scope-auto-redundant [LIMIT]    Only follow URLs with identical query parameter names LIMIT amount of times.
+               --scope-directory-depth-limit LIMIT Directory depth limit.
+               --scope-page-limit LIMIT  How many pages to crawl and audit.
+               --scope-extend-paths FILE  Add the paths in FILE to the ones discovered by the crawler.
+     --scope-restrict-paths FILE Use the paths in FILE instead of crawling.
+     --scope-url-rewrite PATTERN:SUBSTITUTION Rewrite URLs based on the given PATTERN and SUBSTITUTION.
+     --scope-dom-depth-limit LIMIT How deep to go into the DOM tree of each page, for pages with JavaScript code.
+      --scope-https-only   Forces the system to only follow HTTPS URLs.
+                  --audit-links           Audit links.                        
+      --audit-forms           Audit forms.                               
+      --audit-cookies         Audit cookies.                               
+      --audit-cookies-extensively Submit all links and forms of the page along with the cookie permutations.                                                                                           
+      --audit-headers         Audit headers.                               
+      --audit-link-template TEMPLATE Regular expression with named captures to use to extract input information from generic paths.                                                             
+      --audit-jsons           Audit JSON request inputs.                               
+      --audit-xmls            Audit XML request inputs.                               
+      --audit-ui-inputs       Audit orphan Input elements with events.                               
+      --audit-ui-forms        Input and button groups that do not belong to a parent <form> element.
+                  --audit-parameter-names Inject payloads into parameter names.                          
+      --audit-with-raw-payloads Inject payloads with and without HTTP encoding.                         
+      --audit-with-extra-parameter Inject payloads into extra element parameters.                  
+      --audit-with-both-methods  Audit elements with both GET and POST requests.
+      --audit-exclude-vector PATTERN  Exclude input vectorS whose name matches PATTERN.
+                  --audit-include-vector PATTERN Include only input vectors whose name matches PATTERN.
+      --input-value PATTERN:VALUE PATTERN to match against input names and VALUE to use for them.                                                
+      --input-values-file FILE YAML file containing a Hash object with regular expressions, to match against input names, as keys and input values as values.                      
+      --input-without-defaults Do not use the system default input values.                
+      --input-force           Fill-in even non-empty inputs.
+      --http-user-agent USER_AGENT Value for the 'User-Agent' HTTP request header.                
+      --http-request-concurrency MAX_CONCURRENCY Maximum HTTP request                                                       
+      --http-request-timeout TIMEOUT HTTP request timeout in milliseconds.                                                         
+      --http-request-redirect-limit LIMIT Maximum amount of redirects to follow for each HTTP request.                                                 
+      --http-request-queue-size QUEUE_SIZE Maximum amount of requests to keep in the queue.                                                            
+      --http-request-header NAME=VALUE Specify custom headers to be included in the HTTP requests.
+                                                              
+      --http-response-max-size LIMIT Do not download response bodies larger than the specified LIMIT, in bytes.                                                       
+      --http-cookie-jar COOKIE_JAR_FILE Netscape-styled HTTP cookiejar file.                      
+      --http-cookie-string COOKIE Cookie representation as an 'Cookie' HTTP request header.                       
+      --http-authentication-username USERNAME Username for HTTP authentication.                        
+      --http-authentication-password PASSWORD Password for HTTP authentication.             
+      --http-proxy ADDRESS:PORT Proxy to use.                   
+      --http-proxy-authentication USERNAME:PASSWORD Proxy authentication credentials.                      
+      --http-proxy-type http,http_1_0,socks4,socks4a,socks5,socks5h Proxy type.
+                 --http-ssl-verify-peer  Verify SSL peer.    
+      --http-ssl-verify-host  Verify SSL host.                                                   
+      --http-ssl-certificate PATH SSL certificate to use.                    
+      --http-ssl-certificate-type pem,der SSL certificate type.                    
+      --http-ssl-key PATH     SSL private key to use.                  
+      --http-ssl-key-type pem,der SSL key type.                        
+      --http-ssl-key-password PASSWORD Password for the SSL private key.                 
+      --http-ssl-ca PATH      File holding one or more certificates with which to verify the peer.                  
+      --http-ssl-ca-directory PATH Directory holding multiple certificate files with which to verify the peer.                    
+      --http-ssl-version TLSv1,TLSv1_0,TLSv1_1,TLSv1_2,SSLv2,SSLv3 SSL version to use.
+      --checks-list [GLOB]    List available checks based on the provided glob.                                                          
+      --checks CHECK,CHECK2,... Comma separated list of checks to load.
+      --plugins-list [GLOB]   List available plugins based on the provided glob.                                          
+      --plugin 'PLUGIN:OPTION=VALUE,OPTION2=VALUE2' PLUGIN is the name of the plugin as displayed by '--plugins-list'.
+      --platforms-list        List available platforms.                 
+      --platforms-no-fingerprinting Disable platform fingerprinting.
+      --platforms PLATFORM,PLATFORM2,... Comma separated list of platforms (by shortname) to audit.
+      --session-check-url URL URL to use to verify that the scanner is still logged in to the web application.
+      --session-check-pattern PATTERN Pattern used against the body of the 'session-check-url' to verify that the scanner is still logged in to the web application.
+      --profile-save-filepath FILEPATH  Save the current configuration profile/options to FILEPATH.              
+      --profile-load-filepath FILEPATH Load a configuration profile from FILEPATH.
+      --browser-cluster-local-storage FILE
+      --browser-cluster-wait-for-element PATTERN:CSS  Wait for element matching CSS to appear when visiting a page whose URL matches the PATTERN.
+      --browser-cluster-pool-size SIZE Amount of browser workers to keep in the pool and put to work.
+      --browser-cluster-job-timeout SECONDS   Maximum allowed time for each job.                    
+      --browser-cluster-worker-time-to-live LIMIT Re-spawn the browser of each worker every LIMIT jobs.
+      --browser-cluster-ignore-images Do not load images.              
+      --browser-cluster-screen-height Browser screen height.
+      --report-save-path PATH Directory or file path where to store the scan report.
+      --snapshot-save-path PATH
+      --timeout HOURS:MINUTES:SECONDS Stop the scan after the given duration is exceeded.               
+      --timeout-suspend       Suspend after the timeout.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Htcap     
+Parâmetros:
+    htcap crawl -h
+            crawl -d domain -x '${URL_EXCLUDE[$i]}' ${URL[$i]} ${NAME[$i]}.db
+            usage: htcap [options] url outfile
+    Options: 
+  -h               this help
+  -w               overwrite output file
+  -q               do not display progress informations
+  -v               be verbose
+  -m MODE          set crawl mode:
+                      - passive: do not intract with the page
+                      - active: trigger events
+                      - aggressive: also fill input values and crawl forms (default)
+  -s SCOPE         set crawl scope
+                      - domain: limit crawling to current domain (default)
+                      - directory: limit crawling to current directory (and subdirecotries) 
+                      - url: do not crawl, just analyze a single page
+  -D               maximum crawl depth (default: 100)
+  -P               maximum crawl depth for consecutive forms (default: 10)
+  -F               even if in aggressive mode, do not crawl forms
+  -H               save HTML generated by the page
+  -d DOMAINS       comma separated list of allowed domains (ex *.target.com)
+  -c COOKIES       cookies as json or name=value pairs separaded by semicolon
+  -C COOKIE_FILE   path to file containing COOKIES 
+  -r REFERER       set initial referer
+  -x EXCLUDED      comma separated list of urls to exclude (regex) - ie logout urls
+  -p PROXY         proxy string protocol:host:port -  protocol can be 'http' or 'socks5'
+  -n THREADS       number of parallel threads (default: 10)
+  -A CREDENTIALS   username and password used for HTTP authentication separated by a colon
+  -U USERAGENT     set user agent
+  -t TIMEOUT       maximum seconds spent to analyze a page (default 180)
+  -S               skip initial checks
+  -G               group query_string parameters with the same name ('[]' ending excluded)
+  -N               don't normalize URL path (keep ../../)
+  -R               maximum number of redirects to follow (default 10)
+  -I               ignore robots.txt
+  -O               dont't override timeout functions (setTimeout, setInterval)
+  -e               disable hEuristic page deduplication
+  -l               do not run chrome in headless mode
+  -E HEADER        set extra http headers (ex -E foo=bar -E bar=foo)
+  -L SEQUENCE      set login sequence
+
+   htcap scan -h
+   Usage: scan [options] <scanner> <db_file> [scanner_options]
+   Options: 
+  -h                   this help
+  -n THREADS           number of parallel threads
+  -r REQUEST_TYPES     comma separated list of request types to pass to the scanner
+  -m PATH              path to custom modules dir
+  -v                   verbose mode
+  -p PROXY | 0         proxy, set to 0 to disable default (default: crawler)
+  -U USERAGENT         user agent (default: crawler)
+  -c STRING | PATH     cookies (default: request)
+  -E HEADER            extra http headers (default: crawler)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Skipfish
+Parâmetros:
+  -A user:pass      - use specified HTTP authentication credentials
+  -F host=IP        - pretend that 'host' resolves to 'IP'
+  -C name=val       - append a custom cookie to all requests
+  -H name=val       - append a custom HTTP header to all requests
+  -b (i|f|p)        - use headers consistent with MSIE / Firefox / iPhone
+  -N                - do not accept any new cookies
+  --auth-form url   - form authentication URL
+  --auth-user user  - form authentication user
+  --auth-pass pass  - form authentication password
+  --auth-verify-url -  URL for in-session detection
+
+Crawl scope options:
+
+  -d max_depth     - maximum crawl tree depth (16)
+  -c max_child     - maximum children to index per node (512)
+  -x max_desc      - maximum descendants to index per branch (8192)
+  -r r_limit       - max total number of requests to send (100000000)
+  -p crawl%        - node and link crawl probability (100%)
+  -q hex           - repeat probabilistic scan with given seed
+  -I string        - only follow URLs matching 'string'
+  -X string        - exclude URLs matching 'string'
+  -K string        - do not fuzz parameters named 'string'
+  -D domain        - crawl cross-site links to another domain
+  -B domain        - trust, but do not crawl, another domain
+  -Z               - do not descend into 5xx locations
+  -O               - do not submit any forms
+  -P               - do not parse HTML, etc, to find new links
+
+Reporting options:
+
+  -o dir          - write output to specified directory (required)
+  -M              - log warnings about mixed content / non-SSL passwords
+  -E              - log all HTTP/1.0 / HTTP/1.1 caching intent mismatches
+  -U              - log all external URLs and e-mails seen
+  -Q              - completely suppress duplicate nodes in reports
+  -u              - be quiet, disable realtime progress stats
+  -v              - enable runtime logging (to stderr)
+
+Dictionary management options:
+
+  -W wordlist     - use a specified read-write wordlist (required)
+  -S wordlist     - load a supplemental read-only wordlist
+  -L              - do not auto-learn new keywords for the site
+  -Y              - do not fuzz extensions in directory brute-force
+  -R age          - purge words hit more than 'age' scans ago
+  -T name=val     - add new form auto-fill rule
+  -G max_guess    - maximum number of keyword guesses to keep (256)
+
+  -z sigfile      - load signatures from this file
+
+Performance settings:
+
+  -g max_conn     - max simultaneous TCP connections, global (40)
+  -m host_conn    - max simultaneous connections, per target IP (10)
+  -f max_fail     - max number of consecutive HTTP errors (100)
+  -t req_tmout    - total request response timeout (20 s)
+  -w rw_tmout     - individual network I/O timeout (10 s)
+  -i idle_tmout   - timeout on idle HTTP connections (10 s)
+  -s s_limit      - response size limit (400000 B)
+  -e              - do not keep binary responses for reporting
+
+Other settings:
+
+  -l max_req      - max requests per second (0.000000)
+  -k duration     - stop scanning after the given duration h:m:s
+  --config file   - load the specified configuration file
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+SQLMap
+Parâmetros:
+  -h, --help            Show basic help message and exit
+  -hh                   Show advanced help message and exit
+  --version             Show program's version number and exit
+  -v VERBOSE            Verbosity level: 0-6 (default 1)
+
+  Target:
+    At least one of these options has to be provided to define the
+    target(s)
+
+    -d DIRECT           Connection string for direct database connection
+    -u URL, --url=URL   Target URL (e.g. "http://www.site.com/vuln.php?id=1")
+    -l LOGFILE          Parse target(s) from Burp or WebScarab proxy log file
+    -x SITEMAPURL       Parse target(s) from remote sitemap(.xml) file
+    -m BULKFILE         Scan multiple targets given in a textual file
+    -r REQUESTFILE      Load HTTP request from a file
+    -g GOOGLEDORK       Process Google dork results as target URLs
+    -c CONFIGFILE       Load options from a configuration INI file
+
+  Request:
+    These options can be used to specify how to connect to the target URL
+
+    --method=METHOD     Force usage of given HTTP method (e.g. PUT)
+    --data=DATA         Data string to be sent through POST (e.g. "id=1")
+    --param-del=PARA..  Character used for splitting parameter values (e.g. &)
+    --cookie=COOKIE     HTTP Cookie header value (e.g. "PHPSESSID=a8d127e..")
+    --cookie-del=COO..  Character used for splitting cookie values (e.g. ;)
+    --load-cookies=L..  File containing cookies in Netscape/wget format
+    --drop-set-cookie   Ignore Set-Cookie header from response
+    --user-agent=AGENT  HTTP User-Agent header value
+    --random-agent      Use randomly selected HTTP User-Agent header value
+    --host=HOST         HTTP Host header value
+    --referer=REFERER   HTTP Referer header value
+    -H HEADER, --hea..  Extra header (e.g. "X-Forwarded-For: 127.0.0.1")
+    --headers=HEADERS   Extra headers (e.g. "Accept-Language: fr\nETag: 123")
+    --auth-type=AUTH..  HTTP authentication type (Basic, Digest, NTLM or PKI)
+    --auth-cred=AUTH..  HTTP authentication credentials (name:password)
+    --auth-file=AUTH..  HTTP authentication PEM cert/private key file
+    --ignore-code=IG..  Ignore (problematic) HTTP error code (e.g. 401)
+    --ignore-proxy      Ignore system default proxy settings
+    --ignore-redirects  Ignore redirection attempts
+    --ignore-timeouts   Ignore connection timeouts
+    --proxy=PROXY       Use a proxy to connect to the target URL
+    --proxy-cred=PRO..  Proxy authentication credentials (name:password)
+    --proxy-file=PRO..  Load proxy list from a file
+    --tor               Use Tor anonymity network
+    --tor-port=TORPORT  Set Tor proxy port other than default
+    --tor-type=TORTYPE  Set Tor proxy type (HTTP, SOCKS4 or SOCKS5 (default))
+    --check-tor         Check to see if Tor is used properly
+    --delay=DELAY       Delay in seconds between each HTTP request
+    --timeout=TIMEOUT   Seconds to wait before timeout connection (default 30)
+    --retries=RETRIES   Retries when the connection timeouts (default 3)
+    --randomize=RPARAM  Randomly change value for given parameter(s)
+    --safe-url=SAFEURL  URL address to visit frequently during testing
+    --safe-post=SAFE..  POST data to send to a safe URL
+    --safe-req=SAFER..  Load safe HTTP request from a file
+    --safe-freq=SAFE..  Test requests between two visits to a given safe URL
+    --skip-urlencode    Skip URL encoding of payload data
+    --csrf-token=CSR..  Parameter used to hold anti-CSRF token
+    --csrf-url=CSRFURL  URL address to visit for extraction of anti-CSRF token
+    --force-ssl         Force usage of SSL/HTTPS
+    --chunked           Use HTTP chunked transfer encoded (POST) requests
+    --hpp               Use HTTP parameter pollution method
+    --eval=EVALCODE     Evaluate provided Python code before the request (e.g.
+                        "import hashlib;id2=hashlib.md5(id).hexdigest()")
+
+  Optimization:
+    These options can be used to optimize the performance of sqlmap
+
+    -o                  Turn on all optimization switches
+    --predict-output    Predict common queries output
+    --keep-alive        Use persistent HTTP(s) connections
+    --null-connection   Retrieve page length without actual HTTP response body
+    --threads=THREADS   Max number of concurrent HTTP(s) requests (default 1)
+
+  Injection:
+    These options can be used to specify which parameters to test for,
+    provide custom injection payloads and optional tampering scripts
+
+    -p TESTPARAMETER    Testable parameter(s)
+    --skip=SKIP         Skip testing for given parameter(s)
+    --skip-static       Skip testing parameters that not appear to be dynamic
+    --param-exclude=..  Regexp to exclude parameters from testing (e.g. "ses")
+    --param-filter=P..  Select testable parameter(s) by place (e.g. "POST")
+    --dbms=DBMS         Force back-end DBMS to provided value
+    --dbms-cred=DBMS..  DBMS authentication credentials (user:password)
+    --os=OS             Force back-end DBMS operating system to provided value
+    --invalid-bignum    Use big numbers for invalidating values
+    --invalid-logical   Use logical operations for invalidating values
+    --invalid-string    Use random strings for invalidating values
+    --no-cast           Turn off payload casting mechanism
+    --no-escape         Turn off string escaping mechanism
+    --prefix=PREFIX     Injection payload prefix string
+    --suffix=SUFFIX     Injection payload suffix string
+    --tamper=TAMPER     Use given script(s) for tampering injection data
+
+  Detection:
+    These options can be used to customize the detection phase
+
+    --level=LEVEL       Level of tests to perform (1-5, default 1)
+    --risk=RISK         Risk of tests to perform (1-3, default 1)
+    --string=STRING     String to match when query is evaluated to True
+    --not-string=NOT..  String to match when query is evaluated to False
+    --regexp=REGEXP     Regexp to match when query is evaluated to True
+    --code=CODE         HTTP code to match when query is evaluated to True
+    --text-only         Compare pages based only on the textual content
+    --titles            Compare pages based only on their titles
+
+  Techniques:
+    These options can be used to tweak testing of specific SQL injection
+    techniques
+
+    --technique=TECH..  SQL injection techniques to use (default "BEUSTQ")
+    --time-sec=TIMESEC  Seconds to delay the DBMS response (default 5)
+    --union-cols=UCOLS  Range of columns to test for UNION query SQL injection
+    --union-char=UCHAR  Character to use for bruteforcing number of columns
+    --union-from=UFROM  Table to use in FROM part of UNION query SQL injection
+    --dns-domain=DNS..  Domain name used for DNS exfiltration attack
+    --second-url=SEC..  Resulting page URL searched for second-order response
+    --second-req=SEC..  Load second-order HTTP request from file
+
+  Fingerprint:
+    -f, --fingerprint   Perform an extensive DBMS version fingerprint
+
+  Enumeration:
+    These options can be used to enumerate the back-end database
+    management system information, structure and data contained in the
+    tables. Moreover you can run your own SQL statements
+
+    -a, --all           Retrieve everything
+    -b, --banner        Retrieve DBMS banner
+    --current-user      Retrieve DBMS current user
+    --current-db        Retrieve DBMS current database
+    --hostname          Retrieve DBMS server hostname
+    --is-dba            Detect if the DBMS current user is DBA
+    --users             Enumerate DBMS users
+    --passwords         Enumerate DBMS users password hashes
+    --privileges        Enumerate DBMS users privileges
+    --roles             Enumerate DBMS users roles
+    --dbs               Enumerate DBMS databases
+    --tables            Enumerate DBMS database tables
+    --columns           Enumerate DBMS database table columns
+    --schema            Enumerate DBMS schema
+    --count             Retrieve number of entries for table(s)
+    --dump              Dump DBMS database table entries
+    --dump-all          Dump all DBMS databases tables entries
+    --search            Search column(s), table(s) and/or database name(s)
+    --comments          Check for DBMS comments during enumeration
+    --statements        Retrieve SQL statements being run on DBMS
+    -D DB               DBMS database to enumerate
+    -T TBL              DBMS database table(s) to enumerate
+    -C COL              DBMS database table column(s) to enumerate
+    -X EXCLUDE          DBMS database identifier(s) to not enumerate
+    -U USER             DBMS user to enumerate
+    --exclude-sysdbs    Exclude DBMS system databases when enumerating tables
+    --pivot-column=P..  Pivot column name
+    --where=DUMPWHERE   Use WHERE condition while table dumping
+    --start=LIMITSTART  First dump table entry to retrieve
+    --stop=LIMITSTOP    Last dump table entry to retrieve
+    --first=FIRSTCHAR   First query output word character to retrieve
+    --last=LASTCHAR     Last query output word character to retrieve
+    --sql-query=SQLQ..  SQL statement to be executed
+    --sql-shell         Prompt for an interactive SQL shell
+    --sql-file=SQLFILE  Execute SQL statements from given file(s)
+
+  Brute force:
+    These options can be used to run brute force checks
+
+    --common-tables     Check existence of common tables
+    --common-columns    Check existence of common columns
+
+  User-defined function injection:
+    These options can be used to create custom user-defined functions
+
+    --udf-inject        Inject custom user-defined functions
+    --shared-lib=SHLIB  Local path of the shared library
+
+  File system access:
+    These options can be used to access the back-end database management
+    system underlying file system
+
+    --file-read=FILE..  Read a file from the back-end DBMS file system
+    --file-write=FIL..  Write a local file on the back-end DBMS file system
+    --file-dest=FILE..  Back-end DBMS absolute filepath to write to
+
+  Operating system access:
+    These options can be used to access the back-end database management
+    system underlying operating system
+
+    --os-cmd=OSCMD      Execute an operating system command
+    --os-shell          Prompt for an interactive operating system shell
+    --os-pwn            Prompt for an OOB shell, Meterpreter or VNC
+    --os-smbrelay       One click prompt for an OOB shell, Meterpreter or VNC
+    --os-bof            Stored procedure buffer overflow exploitation
+    --priv-esc          Database process user privilege escalation
+    --msf-path=MSFPATH  Local path where Metasploit Framework is installed
+    --tmp-path=TMPPATH  Remote absolute path of temporary files directory
+
+  Windows registry access:
+    These options can be used to access the back-end database management
+    system Windows registry
+
+    --reg-read          Read a Windows registry key value
+    --reg-add           Write a Windows registry key value data
+    --reg-del           Delete a Windows registry key value
+    --reg-key=REGKEY    Windows registry key
+    --reg-value=REGVAL  Windows registry key value
+    --reg-data=REGDATA  Windows registry key value data
+    --reg-type=REGTYPE  Windows registry key value type
+
+  General:
+    These options can be used to set some general working parameters
+
+    -s SESSIONFILE      Load session from a stored (.sqlite) file
+    -t TRAFFICFILE      Log all HTTP traffic into a textual file
+    --batch             Never ask for user input, use the default behavior
+    --binary-fields=..  Result fields having binary values (e.g. "digest")
+    --check-internet    Check Internet connection before assessing the target
+    --crawl=CRAWLDEPTH  Crawl the website starting from the target URL
+    --crawl-exclude=..  Regexp to exclude pages from crawling (e.g. "logout")
+    --csv-del=CSVDEL    Delimiting character used in CSV output (default ",")
+    --charset=CHARSET   Blind SQL injection charset (e.g. "0123456789abcdef")
+    --dump-format=DU..  Format of dumped data (CSV (default), HTML or SQLITE)
+    --encoding=ENCOD..  Character encoding used for data retrieval (e.g. GBK)
+    --eta               Display for each output the estimated time of arrival
+    --flush-session     Flush session files for current target
+    --forms             Parse and test forms on target URL
+    --fresh-queries     Ignore query results stored in session file
+    --har=HARFILE       Log all HTTP traffic into a HAR file
+    --hex               Use hex conversion during data retrieval
+    --output-dir=OUT..  Custom output directory path
+    --parse-errors      Parse and display DBMS error messages from responses
+    --preprocess=PRE..  Use given script(s) for preprocessing of response data
+    --repair            Redump entries having unknown character marker (?)
+    --save=SAVECONFIG   Save options to a configuration INI file
+    --scope=SCOPE       Regexp to filter targets from provided proxy log
+    --test-filter=TE..  Select tests by payloads and/or titles (e.g. ROW)
+    --test-skip=TEST..  Skip tests by payloads and/or titles (e.g. BENCHMARK)
+    --update            Update sqlmap
+
+  Miscellaneous:
+    -z MNEMONICS        Use short mnemonics (e.g. "flu,bat,ban,tec=EU")
+    --alert=ALERT       Run host OS command(s) when SQL injection is found
+    --answers=ANSWERS   Set predefined answers (e.g. "quit=N,follow=N")
+    --beep              Beep on question and/or when SQL injection is found
+    --cleanup           Clean up the DBMS from sqlmap specific UDF and tables
+    --dependencies      Check for missing (optional) sqlmap dependencies
+    --disable-coloring  Disable console output coloring
+    --gpage=GOOGLEPAGE  Use Google dork results from specified page number
+    --list-tampers      Display list of available tamper scripts
+    --mobile            Imitate smartphone through HTTP User-Agent header
+    --offline           Work in offline mode (only use session data)
+    --purge             Safely remove all content from sqlmap data directory
+    --skip-waf          Skip heuristic detection of WAF/IPS protection
+    --smart             Conduct thorough tests only if positive heuristic(s)
+    --sqlmap-shell      Prompt for an interactive sqlmap shell
+    --tmp-dir=TMPDIR    Local directory for storing temporary files
+    --web-root=WEBROOT  Web server document root directory (e.g. "/var/www")
+    --wizard            Simple wizard interface for beginner users     
+
+------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+Metasploit
+Parâmetros:
+    ?             Help menu
+    banner        Display an awesome metasploit banner
+    cd            Change the current working directory
+    color         Toggle color
+    connect       Communicate with a host
+    exit          Exit the console
+    get           Gets the value of a context-specific variable
+    getg          Gets the value of a global variable
+    grep          Grep the output of another command
+    help          Help menu
+    history       Show command history
+    load          Load a framework plugin
+    quit          Exit the console
+    repeat        Repeat a list of commands
+    route         Route traffic through a session
+    save          Saves the active datastores
+    sessions      Dump session listings and display information about sessions
+    set           Sets a context-specific variable to a value
+    setg          Sets a global variable to a value
+    sleep         Do nothing for the specified number of seconds
+    spool         Write console output into a file as well the screen
+    threads       View and manipulate background threads
+    unload        Unload a framework plugin
+    unset         Unsets one or more context-specific variables
+    unsetg        Unsets one or more global variables
+    version       Show the framework and console library version numbers
+
+Module Commands
+    advanced      Displays advanced options for one or more modules
+    back          Move back from the current context
+    info          Displays information about one or more modules
+    loadpath      Searches for and loads modules from a path
+    options       Displays global options or for one or more modules
+    popm          Pops the latest module off the stack and makes it active
+    previous      Sets the previously loaded module as the current module
+    pushm         Pushes the active or list of modules onto the module stack
+    reload_all    Reloads all modules from all defined module paths
+    search        Searches module names and descriptions
+    show          Displays modules of a given type, or all modules
+    use           Interact with a module by name or search term/index
+
+
+Job Commands
+    handler       Start a payload handler as job
+    jobs          Displays and manages jobs
+    kill          Kill a job
+    rename_job    Rename a job
+
+Resource Script Commands
+    makerc        Save commands entered since start to a file
+    resource      Run the commands stored in a file
+
+
+Database Backend Commands
+    analyze           Analyze database information about a specific address or address range
+    db_connect        Connect to an existing data service
+    db_disconnect     Disconnect from the current data service
+    db_export         Export a file containing the contents of the database
+    db_import         Import a scan result file (filetype will be auto-detected)
+    db_nmap           Executes nmap and records the output automatically
+    db_rebuild_cache  Rebuilds the database-stored module cache (deprecated)
+    db_remove         Remove the saved data service entry
+    db_save           Save the current data service connection as the default to reconnect on startup
+    db_status         Show the current data service status
+    hosts             List all hosts in the database
+    loot              List all loot in the database
+    notes             List all notes in the database
+    services          List all services in the database
+    vulns             List all vulnerabilities in the database
+    workspace         Switch between database workspaces
+
+Credentials Backend Commands
+    creds         List all credentials in the database
+
+Developer Commands
+    edit          Edit the current module or a file with the preferred editor
+    irb           Open an interactive Ruby shell in the current context
+    log           Display framework.log paged to the end if possible
+    pry           Open the Pry debugger on the current module or Framework
+    reload_lib    Reload Ruby library files from specified paths
+
+msfconsole
+`msfconsole` is the primary interface to Metasploit Framework. There is quite a
+lot that needs go here, please be patient and keep an eye on this space!    
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wapiti-getcookie
+Parâmetros:
+    wapiti-getcookie -u URL -c COOKIE options
+    Options
+    -p, --proxy PROXY_URL
+    	The given URL will be used as a proxy for HTTP and HTTPS requests.
+    This URL can have one of the following scheme : http, https, socks.
+    To make Wapiti use a Tor listener you can use --proxy socks://127.0.0.1:9050/
+    --tor
+    	Make Wapiti use a Tor listener (same as --proxy socks://127.0.0.1:9050/)
+    -a, --auth-cred CREDENTIALS
+    	Set credentials to use for HTTP authentication on the target.
+    	Given value should be in the form login%password (% is used as a separator)
+    --auth-type TYPE
+ 	Set the authentication mechanism to use. Valid choices are basic, digest, kerberos and ntlm.
+ 	Kerberos and NTLM authentication may require you to install additionnal Python modules.
+    -H, --header HEADER
+ 	Set a custom HTTM header to inject in every request sent by Wapiti. This option can be used several times.
+	Value should be a standard HTTP header line (parameter and value separated with a : sign).
+    -A, --user-agent AGENT
+ 	Default behavior of Wapiti is to use the same User-Agent as the TorBrowser, making it discreet when crawling standard website or .onion ones.
+ 	But you may have to change it to bypass some restrictions so this option is here.
+    -d, --data DATA
+ 	wapiti-getcookie will parse forms and ask your input for each field found.
+ 	But you can also pass every parameter and value as a string directly through this option.
+ 	Example: -d 'login=admin&password=letmein&submit=Login'
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wapiti
+Parâmetros
+      [-h]  [-u URL] [--scope {page,folder,domain,url,punk}]
+              [-m MODULES_LIST] [--list-modules] [-l LEVEL] [-p PROXY_URL]
+              [--tor] [-a CREDENTIALS]
+              [--auth-type {basic,digest,kerberos,ntlm}] [-c COOKIE_FILE]
+              [--skip-crawl] [--resume-crawl] [--flush-attacks]
+              [--flush-session] [--store-session PATH] [-s URL] [-x URL]
+              [-r PARAMETER] [--skip PARAMETER] [-d DEPTH]
+              [--max-links-per-page MAX] [--max-files-per-dir MAX]
+              [--max-scan-time MINUTES] [--max-parameters MAX] [-S FORCE]
+              [-t SECONDS] [-H HEADER] [-A AGENT] [--verify-ssl {0,1}]
+              [--color] [-v LEVEL] [-f FORMAT] [-o OUPUT_PATH]
+              [--external-endpoint EXTERNAL_ENDPOINT_URL]
+              [--internal-endpoint INTERNAL_ENDPOINT_URL]
+              [--endpoint ENDPOINT_URL] [--no-bugreport] [--version]
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wfuzz 
+Parâmetros:
+Options:
+  -h/--help            : This help
+  --version            : Wfuzz version details
+  -e <type>            : List of available encoders/payloads/iterators/printers/scripts
+
+  -c                : Output with colors
+  -v                : Verbose information. Alias for -o verbose
+  -o printer            : Format output using the specified printer (default printer if omitted).
+  --interact            : (beta) If selected,all key presses are captured. This allows you to interact with the program.
+
+  -p addr                : Use Proxy in format ip:port:type or ip:port:type-...-ip:port:type for using various proxies.
+                  Where type could be SOCKS4,SOCKS5 or HTTP if omitted.
+
+  -t N                : Specify the number of concurrent connections (10 default)
+  -s N                : Specify time delay between requests (0 default)
+  -R depth            : Recursive path discovery being depth the maximum recursion level.
+  -I                : Use HTTP HEAD method (No HTML body responses).
+  --follow            : Follow HTTP redirections
+  -Z                : Scan mode (Connection errors will be ignored).
+
+  -A                : Alias for --script=default -v -c
+  --script=            : Equivalent to --script=default
+  --script=<plugins>        : Runs script's scan. <plugins> is a comma separated list of plugin-files or plugin-categories
+  --script-help=<plugins>        : Show help about scripts.
+  --script-args n1=v1,...     : Provide arguments to scripts. ie. --script-args grep.regex="<A href=\"(.*?)\">"
+
+  -m iterator            : Specify an iterator for combining payloads (product by default)
+  -z payload            : Specify a payload for each FUZZ keyword used in the form of type,parameters,encoder.
+                  A list of encoders can be used, ie. md5-sha1. Encoders can be chained, ie. md5@sha1.
+                  Encoders category can be used. ie. url
+  -w wordlist            : Specify a wordlist file (alias for -z file,wordlist).
+  -V alltype            : All parameters bruteforcing (allvars and allpost). No need for FUZZ keyword.
+  -X                : Payload within HTTP methods (ex: "FUZZ HTTP/1.0"). No need for FUZZ keyword.
+
+  -b cookie            : Specify a cookie for the requests
+  -d postdata             : Use post data (ex: "id=FUZZ&catalogue=1")
+  -H headers              : Use headers (ex:"Host:www.mysite.com,Cookie:id=1312321&user=FUZZ")
+  --basic/ntlm/digest auth    : in format "user:pass" or "FUZZ:FUZZ" or "domain\FUZ2Z:FUZZ"
+
+  --hc/hl/hw/hh N[,N]+        : Hide responses with the specified code/lines/words/chars (Use BBB for taking values from baseline)
+  --sc/sl/sw/sh N[,N]+        : Show responses with the specified code/lines/words/chars (Use BBB for taking values from baseline)
+  --ss/hs regex            : Show/Hide responses with the specified regex within the content
+  --filter <filter>        : Filter responses using the specified expression (Use BBB for taking values from baseline)
+                  It should be composed of: c,l,w,h/and,or/=,<,>,!=,<=,>=
+
+Keyword: FUZZ, ..., FUZnZ  wherever you put these keywords wfuzz will replace them with the values of the specified payload.
+Baseline: FUZZ{baseline_value} FUZZ will be replaced by baseline_value. It will be the first request performed and could be used as a base for filtering.
+
+Examples: - wfuzz.py -c -z file,users.txt -z file,pass.txt --sc 200 http://www.site.com/log.asp?user=FUZZ&pass=FUZ2Z
+      - wfuzz.py -c -z range,1-10 --hc=BBB http://www.site.com/FUZZ{something not there}
+      - wfuzz.py --script=robots -z list,robots.txt http://www.webscantest.com/FUZZ
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+XSSer (Cross Site Scripter)
+Parâmetros:
+    Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -s, --statistics      show advanced statistics output results
+  -v, --verbose         active verbose mode output results
+  --gtk                 launch XSSer GTK Interface
+  --wizard              start Wizard Helper!
+
+  *Special Features*:
+    You can set Vector(s) and Bypasser(s) to build complex scripts for XSS
+    code embedded. XST allows you to discover if target is vulnerable to
+    'Cross Site Tracing' [CAPEC-107]:
+
+    --imx=IMX           IMX - Create an image with XSS (--imx image.png)
+    --fla=FLASH         FLA - Create a flash movie with XSS (--fla movie.swf)
+    --xst=XST           XST - Cross Site Tracing (--xst http(s)://host.com)
+
+  *Select Target(s)*:
+    At least one of these options must to be specified to set the source
+    to get target(s) urls from:
+
+    --all=TARGET        Automatically audit an entire target
+    -u URL, --url=URL   Enter target to audit
+    -i READFILE         Read target(s) urls from file
+    -d DORK             Search target(s) using a query (ex: 'news.php?id=')
+    -l                  Search from a list of 'dorks'
+    --De=DORK_ENGINE    Use this search engine (default: yahoo)
+    --Da                Search massively using all search engines
+
+  *Select type of HTTP/HTTPS Connection(s)*:
+    These options can be used to specify which parameter(s) we want to use
+    as payload(s). Set 'XSS' as keyword on the place(s) that you want to
+    inject:
+
+    -g GETDATA          Send payload using GET (ex: '/menu.php?id=3&q=XSS')
+    -p POSTDATA         Send payload using POST (ex: 'foo=1&bar=XSS')
+    -c CRAWLING         Number of urls to crawl on target(s): 1-99999
+    --Cw=CRAWLER_WIDTH  Deeping level of crawler: 1-5 (default 3)
+    --Cl                Crawl only local target(s) urls (default TRUE)
+
+  *Configure Request(s)*:
+    These options can be used to specify how to connect to the target(s)
+    payload(s). You can choose multiple:
+
+    --cookie=COOKIE     Change your HTTP Cookie header
+    --drop-cookie       Ignore Set-Cookie header from response
+    --user-agent=AGENT  Change your HTTP User-Agent header (default SPOOFED)
+    --referer=REFERER   Use another HTTP Referer header (default NONE)
+    --xforw             Set your HTTP X-Forwarded-For with random IP values
+    --xclient           Set your HTTP X-Client-IP with random IP values
+    --headers=HEADERS   Extra HTTP headers newline separated
+    --auth-type=ATYPE   HTTP Authentication type (Basic, Digest, GSS or NTLM)
+    --auth-cred=ACRED   HTTP Authentication credentials (name:password)
+    --proxy=PROXY       Use proxy server (tor: http://localhost:8118)
+    --ignore-proxy      Ignore system default HTTP proxy
+    --timeout=TIMEOUT   Select your timeout (default 30)
+    --retries=RETRIES   Retries when the connection timeouts (default 1)
+    --threads=THREADS   Maximum number of concurrent HTTP requests (default 5)
+    --delay=DELAY       Delay in seconds between each HTTP request (default 0)
+    --tcp-nodelay       Use the TCP_NODELAY option
+    --follow-redirects  Follow server redirection responses (302)
+    --follow-limit=FLI  Set limit for redirection requests (default 50)
+
+  *Checker Systems*:
+    These options are useful to know if your target is using filters
+    against XSS attacks:
+
+    --hash              send a hash to check if target is repeating content
+    --heuristic         discover parameters filtered by using heuristics
+    --discode=DISCODE   set code on reply to discard an injection
+    --checkaturl=ALT    check reply using: alternative url -> Blind XSS
+    --checkmethod=ALTM  check reply using: GET or POST (default: GET)
+    --checkatdata=ALD   check reply using: alternative payload
+    --reverse-check     establish a reverse connection from target to XSSer to
+                        certify that is 100% vulnerable (recommended!)
+
+  *Select Vector(s)*:
+    These options can be used to specify injection(s) code. Important if
+    you don't want to inject a common XSS vector used by default. Choose
+    only one option:
+
+    --payload=SCRIPT    OWN  - Inject your own code
+    --auto              AUTO - Inject a list of vectors provided by XSSer
+
+  *Anti-antiXSS Firewall rules*:
+    These options can be used to try to bypass specific WAF/IDS products.
+    Choose only if required:
+
+    --Phpids0.6.5       PHPIDS (0.6.5) [ALL]
+    --Phpids0.7         PHPIDS (0.7) [ALL]
+    --Imperva           Imperva Incapsula [ALL]
+    --Webknight         WebKnight (4.1) [Chrome]
+    --F5bigip           F5 Big IP [Chrome + FF + Opera]
+    --Barracuda         Barracuda WAF [ALL]
+    --Modsec            Mod-Security [ALL]
+    --Quickdefense      QuickDefense [Chrome]
+
+  *Select Bypasser(s)*:
+    These options can be used to encode vector(s) and try to bypass
+    possible anti-XSS filters. They can be combined with other techniques:
+
+    --Str               Use method String.FromCharCode()
+    --Une               Use Unescape() function
+    --Mix               Mix String.FromCharCode() and Unescape()
+    --Dec               Use Decimal encoding
+    --Hex               Use Hexadecimal encoding
+    --Hes               Use Hexadecimal encoding with semicolons
+    --Dwo               Encode IP addresses with DWORD
+    --Doo               Encode IP addresses with Octal
+    --Cem=CEM           Set different 'Character Encoding Mutations'
+                        (reversing obfuscators) (ex: 'Mix,Une,Str,Hex')
+
+  *Special Technique(s)*:
+    These options can be used to inject code using different XSS
+    techniques. You can choose multiple:
+
+    --Coo               COO - Cross Site Scripting Cookie injection
+    --Xsa               XSA - Cross Site Agent Scripting
+    --Xsr               XSR - Cross Site Referer Scripting
+    --Dcp               DCP - Data Control Protocol injections
+    --Dom               DOM - Document Object Model injections
+    --Ind               IND - HTTP Response Splitting Induced code
+    --Anchor            ANC - Use Anchor Stealth payloader (DOM shadows!)
+
+  *Select Final injection(s)*:
+    These options can be used to specify the final code to inject on
+    vulnerable target(s). Important if you want to exploit 'on-the-wild'
+    the vulnerabilities found. Choose only one option:
+
+    --Fp=FINALPAYLOAD   OWN    - Exploit your own code
+    --Fr=FINALREMOTE    REMOTE - Exploit a script -remotely-
+    --Doss              DOSs   - XSS (server) Denial of Service
+    --Dos               DOS    - XSS (client) Denial of Service
+    --B64               B64    - Base64 code encoding in META tag (rfc2397)
+
+  *Special Final injection(s)*:
+    These options can be used to execute some 'special' injection(s) on
+    vulnerable target(s). You can select multiple and combine them with
+    your final code (except with DCP code):
+
+    --Onm               ONM - Use onMouseMove() event
+    --Ifr               IFR - Use <iframe> source tag
+
+  *Reporting*:
+    --save              export to file (XSSreport.raw)
+    --xml=FILEXML       export to XML (--xml file.xml)
+
+  *Miscellaneous*:
+    --silent            inhibit console output results
+    --no-head           NOT send a HEAD request before start a test
+    --alive=ISALIVE     set limit of errors before check if target is alive
+    --update            check for latest stable version
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+ZAP-cli
+Parâmetros:
+    Usage: zap-cli [OPTIONS] COMMAND [ARGS]...
+Options:
+  --boring            Remove color from console output.
+  -v, --verbose       Add more verbose debugging output.
+  --zap-path TEXT     Path to the ZAP daemon. Defaults to /zap or the value of
+                      the environment variable ZAP_PATH.
+  -p, --port INTEGER  Port of the ZAP proxy. Defaults to 8090 or the value of
+                      the environment variable ZAP_PORT.
+      --zap-url TEXT      The URL of the ZAP proxy. Defaults to http://127.0.0.1
+                      or the value of the environment variable ZAP_URL.
+  --api-key TEXT      The API key for using the ZAP API if required. Defaults
+                      to the value of the environment variable ZAP_API_KEY.
+  --log-path TEXT     Path to the directory in which to save the ZAP output
+                      log file. Defaults to the value of the environment
+                      variable ZAP_LOG_PATH and uses the value of --zap-path
+                      if it is not set.
+  --help              Show this message and exit.
+
+Commands:
+  active-scan  Run an Active Scan.
+  ajax-spider  Run the AJAX Spider against a URL.
+  alerts       Show alerts at the given alert level.
+  context      Manage contexts for the current session.
+  exclude      Exclude a pattern from all scanners.
+       open-url     Open a URL using the ZAP proxy.
+  policies     Enable or list a set of policies.
+  quick-scan   Run a quick scan.
+  report       Generate XML, MD or HTML report.
+  scanners     Enable, disable, or list a set of scanners.
+  scripts      Manage scripts.
+  session      Manage sessions.
+  shutdown     Shutdown the ZAP daemon.
+  spider       Run the spider against a URL.
+  start        Start the ZAP daemon.
+  status       Check if ZAP is running.
