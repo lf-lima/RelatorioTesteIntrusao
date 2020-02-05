@@ -1,0 +1,22 @@
+# Estudo de caso com ferramentas de teste de intrusão
+# Execução da ferramenta Wapiti-getcookie
+# Identificadores de sessão das aplicações sob teste: bWAPP, DVWA e Webgoat
+
+#bwapp.json
+
+#dvwa.json
+
+#webgoat.json
+{
+  ".testesseg.c3sl.ufpr.br": {
+    "/WebGoat": {
+      "JSESSIONID": {
+        "value": "81B307B5954E0211345ADEF27C456E24",
+        "port": null,
+        "secure": false,
+        "version": 0,
+        "expires": null
+      }
+    }
+  }
+}
