@@ -3,8 +3,41 @@
 # Identificadores de sessão das aplicações sob teste: bWAPP, DVWA e Webgoat
 
 #bwapp.json
+{
+  ".testesseg.c3sl.ufpr.br": {
+    "/": {
+      "PHPSESSID": {
+        "port": null,
+        "expires": null,
+        "secure": false,
+        "value": "jm3pgpm4o0sqrqd9t10s6lk801",
+        "version": 0
+      }
+    }
+  }
+}
 
 #dvwa.json
+{
+  ".testesseg.c3sl.ufpr.br": {
+    "/": {
+      "PHPSESSID": {
+        "expires": null,
+        "version": 0,
+        "value": "hd3in5j0m6uu59rq93is8rq0o7",
+        "port": null,
+        "secure": false
+      },
+      "security": {
+        "expires": null,
+        "version": 0,
+        "value": "low",
+        "port": null,
+        "secure": false
+      }
+    }
+  }
+}
 
 #webgoat.json
 {
